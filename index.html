@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FOR SEO" />
+    <meta name="keywords" content="FOR SEO" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+    />
+
+    <link rel="stylesheet" href="./dist/style.css" />
+    <title>Grizzly Elite</title>
+    <link rel="icon" type="image/x-icon" href="./media/logo/grizzly-logo.png" />
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <style>
+                .hero-container{
+                  min-height: unset !important;
+                } 
+                .hero{
+                  height: unset !important;
+                min-height: 100vh !important;
+                }
+                main{
+                  min-height: 100vh;
+                }
+                .footer{
+                  margin: 0 auto;
+                  margin-top: 70px;
+                  width: 100%;
+                  max-width: 1000px;
+                  display: flex;
+                  flex-direction: column;
+                  text-align: center;
+                  justify-content: center;
+                  align-items: center;
+                  padding: 40px 20px;
+                  color: #fff;
+                }
+                .footer .calend{
+                  color: #fff;
+                }
+                .footer .calend .blue-underline{
+                  text-decoration: underline;
+                  color: #007bff;
+                }
+                .two_buttons{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 30px;
+                }
+                .two_buttons > button{
+                  margin: 0;
+                }
+                .st-arrow.st-arrow_parent-details {
+                    fill: #fff !important;
+                }
+    </style>
+    <header class="bg-color_primary m-pt-0">
+      <nav class="nav m-pb-10 m-pt-10">
+        <div class="previous-button width_50" style="display: none">
+          <div class="btn btn-prev disabled">
+            <img src="./media/icons/previous_icon.png" alt="previous icon" />
+          </div>
+        </div>
+
+        <div class="nav-logo m-width_30" >
+          <a href="#">
+            <img
+              src="./media/logo/grizzly-logo.png"
+              alt="Grizzly Logo Red"
+              style="width: 60%; height: auto;"
+            />
+          </a>
+          
+        </div>
+        <!-- <div class="timer m-width_100 text-align_center m-text-align_center">
+          <div class="timer-container">
+            <p class="font-size_18px font-color_white font-weight_600">
+              00:<span class="font-color_red" id="grizzlyTimer"></span>
+            </p>
+          </div>
+        </div> -->
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-container">
+          <div>
+            <h1 class="font-size_64px font-weight_700 text-align_center wyg font-color_white pt-100">
+              Grizzly Elite Checkout
+            </h1>
+          </div>
+          <div class="container">
+            <div
+              class="step-1"
+              id="checkout-progress"
+              data-current-step="1"
+              style="display: none"
+            >
+              <div class="progress-bar">
+                <div class="step step-0">
+                  <div class="opaque"></div>
+                </div>
+                <div class="step step-1">
+                  <div class="opaque"></div>
+                  <div class="round-center"></div>
+                </div>
+                <div class="step step-2">
+                  <div class="opaque"></div>
+                  <div class="round-center"></div>
+                </div>
+                <div class="step step-3">
+                  <div class="opaque"></div>
+                  <div class="round-center"></div>
+                </div>
+                <div class="step step-4">
+                  <div class="opaque"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form id="grizzlyForm " class="">
+            <div class="get-name section1 pt-10" id="section1">
+              <div class="container">
+                <div class="font-color_white text-align_center">
+                  <h4 class="font-weight_400 mb-20">
+                    Please fill out your details
+                  </h4>
+                  <div class="get-details_container">
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="text"
+                      placeholder="Your first name"
+                      id="yFirstName"
+                      name="yFirstName"
+                      oninput="clearInvalidMessage()"
+                    />
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="text"
+                      placeholder="Your last name"
+                      id="yLastName"
+                      name="yLastName"
+                      oninput="clearInvalidMessage()"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-next button_primary"
+                    onclick="formValidation()"
+                    id="personalDetails"
+                    disabled
+                  >
+                    Next
+                    <div class="ico animated">
+                      <svg
+                        class="svg"
+                        fill="#000000"
+                        height="40px"
+                        width="40px"
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 330 330"
+                        xml:space="preserve"
+                      >
+                        <defs>
+                          <clipPath id="cut-off-arrow">
+                            <circle cx="306" cy="306" r="287" />
+                          </clipPath>
+
+                          <filter id="goo">
+                            <feGaussianBlur
+                              in="SourceGraphic"
+                              stdDeviation="10"
+                              result="blur"
+                            />
+                            <feColorMatrix
+                              in="blur"
+                              mode="matrix"
+                              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                              result="goo"
+                            />
+                            <feBlend in="SourceGraphic" in2="goo" />
+                          </filter>
+                        </defs>
+                        <path
+                          id="XMLID_27_"
+                          class="st-arrow st-arrow_personal-detail"
+                          d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                              s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                              c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="get-email section2 pt-10"
+              id="section2"
+              style="display: none"
+            >
+              <div class="container">
+                <div class="font-color_white text-align_center">
+                  
+                  <h4 class="font-weight_400 mb-20">
+                    Please Fill In Your Legal Parent/Guardian Details
+                  </h4>
+                  <div class="get-details_container">
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="text"
+                      placeholder="Parent first name"
+                      id="yParentFirstName"
+                      name="yParentFirstName"
+                      oninput="clearInvalidMessage()"
+                    />
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="text"
+                      placeholder="Parent last name"
+                      id="yParentLastName"
+                      name="yParentLastName"
+                      oninput="clearInvalidMessage()"
+                    />
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="email"
+                      placeholder="Parent email"
+                      id="yParentEmail"
+                      name="yParentEmail"
+                      oninput="clearInvalidMessage()"
+                    />
+
+                    <input
+                      class="display_block hero-input mb-20 get-details_input get-input"
+                      type="tel"
+                      placeholder="Parent phone number"
+                      id="yParentPhoneNumber"
+                      name="yParentPhoneNumber"
+                      oninput="clearInvalidMessage()"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="two_buttons">
+                  <button
+                  type="button"
+                  class="btn btn-next button_primary"
+                  onclick="window.location.href='https://tuition.grizzlyelite.com/b/00gbLG0bf1Gf2Hu28M' "
+                >
+                  Pay now
+                  <div class="ico animated">
+                    <svg
+                      class="svg"
+                      fill="#fff"
+                      height="40px"
+                      width="40px"
+                      version="1.1"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 330 330"
+                      xml:space="preserve"
+                    >
+                      <defs>
+                        <clipPath id="cut-off-arrow">
+                          <circle cx="306" cy="306" r="287" />
+                        </clipPath>
+
+                        <filter id="goo">
+                          <feGaussianBlur
+                            in="SourceGraphic"
+                            stdDeviation="10"
+                            result="blur"
+                          />
+                          <feColorMatrix
+                            in="blur"
+                            mode="matrix"
+                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                            result="goo"
+                          />
+                          <feBlend in="SourceGraphic" in2="goo" />
+                        </filter>
+                      </defs>
+                      <path
+                        id="XMLID_27_"
+                        class="st-arrow st-arrow_parent-details"
+                        d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                              s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                              c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                  <button
+                  type="button"
+                  class="btn btn-next button_primary"
+                  onclick="window.location.href='https://tuition.grizzlyelite.com/b/cN2172aPTdoXbe0bJl' "
+                >
+                  Pay now
+                  <div class="ico animated">
+                    <svg
+                      class="svg"
+                      fill="#000000"
+                      height="40px"
+                      width="40px"
+                      version="1.1"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 330 330"
+                      xml:space="preserve"
+                    >
+                      <defs>
+                        <clipPath id="cut-off-arrow">
+                          <circle cx="306" cy="306" r="287" />
+                        </clipPath>
+
+                        <filter id="goo">
+                          <feGaussianBlur
+                            in="SourceGraphic"
+                            stdDeviation="10"
+                            result="blur"
+                          />
+                          <feColorMatrix
+                            in="blur"
+                            mode="matrix"
+                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                            result="goo"
+                          />
+                          <feBlend in="SourceGraphic" in2="goo" />
+                        </filter>
+                      </defs>
+                      <path
+                        id="XMLID_27_"
+                        class="st-arrow st-arrow_parent-details"
+                        d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                              s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                              c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                </div>
+
+          
+              </div>
+              <div class="footer">
+                <div class="width_100 flex-container mb-5">
+                  <img style="width: 82%;" src="./media/icons/checkout_one_line.png" alt="joaquin revello portrait">
+                </div>
+                <div class="font-size_12px pl-80 pr-80 m-font-size_20px m-pr-0 m-pl-0 line-height_18">
+                  <a class="calend" href="https://calendly.com/joaquin-revello/joaquin-revello-grizzly-elite-one-on-ones?month=2023-12&date=2023-12-03" class="link-with-icon" target="_blank">
+                    Have Questions Ordering? <span class="blue-underline">Schedule</span> a 1:1 Time With Your Parent to Speak With Joaquin. This Offer Expires on December 31st, 2023 at 11:59 PM EST (NY Time)
+                  </a>
+                </div>     
+
+              </div>
+             
+            </div>
+
+            <div
+              class="get-billing section3 pt-50"
+              id="section3"
+              style="display: none "
+            >
+              <div class="container get-billing-container">
+                <div
+                  class="font-color_white text-align_center width_50 pl-80 pr-80 m-pl-0 m-pr-0"
+                >
+                  <div id="link-auth-element" class=""></div>
+                  <div id="address-element" class=""></div>
+                  <div id="payment-element" class=""></div>
+                  <div
+                    class="submit-payment-container bg-color_white pt-50 pb-50"
+                  >
+                    <button
+                      type="button"
+                      id="submit-payment"
+                      class="button_primary button_red btn-open"
+                    >
+                      Submit Payment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal hidden">
+              <div class="modal-container">
+                <div class="flex">
+                  <button type="button" class="btn-close">⨉</button>
+                </div>
+                <div class="text-align_center">
+                  <p class="font-color_white font-size_28px font-weight_700">
+                    Would you like to Bulk pay?
+                  </p>
+                </div>
+                <button type="button" class="btn button_primary btn-please">
+                  Yes Please!
+                </button>
+              </div>
+            </div>
+            <div class="overlay hidden"></div>
+          </form>
+          <div
+            class="get-verification pt-150"
+            id="#verification"
+            style="display: none"
+          >
+            <div class="container">
+              <div
+                class="get-verification_container font-color_white text-align_center pl-100 pr-100 m-pl-0 m-pr-0"
+              >
+                <div class="spin">
+                  <p
+                    class="font-size_32px font-weight_700"
+                    id="submissionPercent"
+                  ></p>
+                </div>
+
+                <h1
+                  class="pt-80 pb-30 pl-150 pr-150 m-pl-0 m-pr-0 m-font-size_32px"
+                >
+                  Please be patient as we verify your payment.
+                </h1>
+                <div class="get-verification_img-container">
+                  <img
+                    class="pl-20 pr-20 m-pb-30"
+                    src="./media/icons/google-fivestars_icon.png"
+                    alt="google rating"
+                  />
+                  <img
+                    class="pl-20 pr-20 m-pb-30"
+                    src="./media/icons/linkedin-fivestars_icon.png"
+                    alt="linkedin rating"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/formValidation.js"></script>
+    <script type="text/javascript" src="./js/stripe.js"></script>
+    <script type="text/javascript" src="./js/modal.js"></script>
+    <script type="text/javascript" src="./js/postRequest.js"></script>
+  </body>
+</html>
